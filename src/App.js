@@ -1,19 +1,18 @@
 import logo from './logo.svg';
 import './App.css';
-import Register from './components/login/Register';
-import Login from './components/login/Login';
 import { Outlet, Route, Routes } from 'react-router-dom';
+import GlobalStyle from './style/GlobalStyle';
+import Login from './components/login/Login';
 
 function App() {
   return (
 
     <>
-    {/* <GlobalStyle> */}
+    <GlobalStyle/>
     {/* {location.pathname !== '/' && <NavigationBar></NavigationBar>} */}
       <Routes>
       </Routes>
       <Outlet/>
-    {/* </GlobalStyle> */}
     </>
 
   );
