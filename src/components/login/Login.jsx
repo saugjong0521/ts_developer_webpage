@@ -49,41 +49,121 @@ export default function Login (){
 
 
     return(
-        <>
-        <LoginForm onSubmit={handleLoginSubmit}>
-            <input 
-                type="text" 
-                name="username"
-                value={login.username} 
-                placeholder="아이디를 입력하세요"
-                onChange={handleInputChange}    
-            ></input>
-
-            <input 
-                type="password"
-                name="password" 
-                value={login.password} 
-                placeholder="비밀번호를 입력하세요"
-                onChange={handleInputChange}
-            ></input>
-            
-            <button type="submit">로그인</button>
-            {message && <Message>{message}</Message>} {/* 메시지 표시 */}
-        </LoginForm>
-
-        <button>
-            <Link to='register'>가입하기</Link>
-        </button>
-        </>
+        <Container>
+            <LoginForm onSubmit={handleLoginSubmit}>
+                <input 
+                    type="text" 
+                    name="username"
+                    value={login.username} 
+                    placeholder="아이디를 입력하세요"
+                    onChange={handleInputChange}    
+                />
+                <input 
+                    type="password"
+                    name="password" 
+                    value={login.password} 
+                    placeholder="비밀번호를 입력하세요"
+                    onChange={handleInputChange}
+                />
+                <button type="submit">로그인</button>
+                {message && <Message>{message}</Message>}
+                <RegisterLink to='register'>가입하기</RegisterLink>
+            </LoginForm>
+        </Container>
     )
 
 }
 
-const LoginForm = styled.form`
+const Container = styled.div`
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    background-color: #f5f5f5;
+    gap: 20px;
 
+    button {
+        background-color: #333;
+        border: none;
+        padding: 10px 20px;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+
+        &:hover {
+            background-color: #555;
+        }
+
+        a {
+            color: white;
+            text-decoration: none;
+            font-size: 16px;
+        }
+    }
+`
+
+const LoginForm = styled.form`
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    background-color: white;
+    padding: 40px;
+    border-radius: 10px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 400px;
+
+    input {
+        padding: 12px;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        font-size: 16px;
+        transition: border-color 0.3s ease;
+
+        &:focus {
+            outline: none;
+            border-color: #666;
+        }
+    }
+
+    button {
+        background-color: #222;
+        color: white;
+        padding: 12px;
+        border: none;
+        border-radius: 5px;
+        font-size: 16px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+
+        &:hover {
+            background-color: #444;
+        }
+    }
 `
 
 const Message = styled.div`
+    margin-top: 5px;
+    color: #d32f2f;
+    text-align: center;
+    font-size: 14px;
+`;
+
+const RegisterLink = styled(Link)`
+    background-color: #888;
+    color: #fff;
+    text-decoration: none;
+    text-align: center;
+    font-size: 14px;
     margin-top: 10px;
-    color: red; /* 메시지 색상 설정 */
+    padding: 10px;
+    border-radius: 5px;
+    transition: all 0.3s ease;
+    font-weight: 500;
+
+    &:hover {
+        background-color: #ccc;
+        color: #222;
+    }
 `;

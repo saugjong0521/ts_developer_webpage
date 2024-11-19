@@ -50,7 +50,7 @@ export default function Register() { // 컴포넌트 이름 변경
     };
 
     return (
-        <>
+        <Container>
             <RegisterForm onSubmit={handleRegisterSubmit}> {/* 폼 이름 변경 */}
                 <input 
                     type="text" 
@@ -85,19 +85,84 @@ export default function Register() { // 컴포넌트 이름 변경
                     required
                 />
                 <button type="submit">회원가입</button> {/* 버튼 텍스트 변경 */}
+                <LoginLink to='/'>돌아가기</LoginLink>
             </RegisterForm>
             {message && <Message>{message}</Message>} {/* 메시지 표시 */}
-
-            <button><Link to='/'>돌아가기</Link></button>
-        </>
+        </Container>
     );
 }
 
-const RegisterForm = styled.form` // 폼 이름 변경
-    /* 스타일 추가 가능 */
+const Container = styled.div`
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    background-color: #f5f5f5;
+    padding: 20px;
+`;
+
+const RegisterForm = styled.form`
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    width: 100%;
+    max-width: 400px;
+    padding: 30px;
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+
+    input {
+        padding: 12px;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+        font-size: 16px;
+        transition: border-color 0.3s;
+
+        &:focus {
+            outline: none;
+            border-color: #666;
+        }
+    }
+
+    button {
+        padding: 12px;
+        background-color: #333;
+        color: white;
+        border: none;
+        border-radius: 4px;
+        font-size: 16px;
+        cursor: pointer;
+        transition: background-color 0.3s;
+
+        &:hover {
+            background-color: #555;
+        }
+    }
 `;
 
 const Message = styled.div`
+    margin-top: 15px;
+    color: #d32f2f;
+    font-size: 14px;
+    text-align: center;
+`;
+
+const LoginLink = styled(Link)`
+    background-color: #888;
+    color: #fff;
+    text-decoration: none;
+    text-align: center;
+    font-size: 14px;
     margin-top: 10px;
-    color: red; /* 메시지 색상 설정 */
+    padding: 10px;
+    border-radius: 5px;
+    transition: all 0.3s ease;
+    font-weight: 500;
+
+    &:hover {
+        background-color: #ccc;
+        color: #222;
+    }
 `;

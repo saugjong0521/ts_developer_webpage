@@ -7,16 +7,27 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import Login from './components/login/Login';
 import Home from './components/login/Home';
 import Register from './components/login/Register';
+import Content from './components/login/Content';
+import DoodleDraw from './components/doodledraw/DoodleDraw';
+import TranslateChat from './components/translatechat/TranslateChat';
+
 
 const routes = createBrowserRouter([
   {
     path: '/',
     element: <App/>,
-    // errorElement : 
     children: [
       { path: '/', element: <Login/> },
       { path: 'home', element: <Home/> },
       { path: 'register', element: <Register/> },
+      { 
+        path: 'content', 
+        element: <Content/>,
+        children: [
+          { path: 'doodledraw', element: <DoodleDraw/> },
+          { path: 'translatechat', element: <TranslateChat/> }
+        ]
+      },
     ]
   }
 ])

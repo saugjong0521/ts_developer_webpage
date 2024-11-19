@@ -34,6 +34,7 @@ footer, header, hgroup, menu, nav, section {
 }
 body {
 	line-height: 1;
+	overflow: hidden;
 }
 ol, ul {
 	list-style: none;
@@ -50,6 +51,22 @@ table {
 	border-collapse: collapse;
 	border-spacing: 0;
 }
+
+button{
+	margin: 0;
+	padding: 0;
+	border: 0;
+}
+
+.container{
+	display: block;
+	width: ${props => props.isNavVisible ? '95vw' : '100vw'};
+	height: 100vh;
+   	margin: 0 auto;
+  	padding: 0px;
+  	transition: width 0.3s ease;
+}
+
 
 `
 
