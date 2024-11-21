@@ -11,18 +11,10 @@ export default function Content() {
         <ContentContainer>
             <div style={{ display: 'flex' }}>
                 <Navigation />
-                <MainContent style={{ width: isNavVisible ? '95vw' : '100vw' }}>
+                <MainContent isNavVisible={isNavVisible}>
                     {!isNavVisible && (
                         <button 
-                            onClick={() => setIsNavVisible(true)}
-                            style={{ 
-                                position: 'fixed', 
-                                left: 0, 
-                                top: 0,
-                                backgroundColor: 'transparent',
-                                cursor: 'pointer'
-                            }}
-                        >
+                            onClick={() => setIsNavVisible(true)}>
                             <IoMdArrowRoundBack 
                                 style={{ 
                                     transform: 'rotate(180deg)',
@@ -49,4 +41,13 @@ const MainContent = styled.div`
     transition: width 0.3s ease;
     overflow-y: auto;
     overflow-x: hidden;
+    width : ${(props) => (props.isNavVisible ? "95vw" : "100vw")};
+    
+    button{
+        position: fixed;
+        left: 0;
+        top: 0;
+        background-color: transparent;
+        cursor: pointer;
+    }
 `;

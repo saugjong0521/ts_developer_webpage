@@ -107,6 +107,7 @@ const NaviContainer = styled.div`
     }
 
     .profile-box{
+        padding-top: 2vh;
         width: 100%;
         height: 10vh;
         display: flex;
@@ -114,6 +115,7 @@ const NaviContainer = styled.div`
         align-items: center;
         justify-content: space-between;
         gap: 10px;
+        background-color: #ddd;
 
         .profile{
             width: 100%;
@@ -133,7 +135,7 @@ const NaviContainer = styled.div`
                 width: 50%;
                 height: 100%;
                 right: 0;
-                background-color: #bbb;
+                background-color: #ddd;
                 cursor: pointer;
                 margin: 0 0 0 auto;
                 align-items: center;
