@@ -60,7 +60,7 @@ button{
 
 .container{
 	display: block;
-	width: ${props => props.isNavVisible ? '95vw' : '100vw'};
+	width: ${(props) => (props.isNavVisible) ? '95vw' : '100vw'};
 	height: 100vh;
    	margin: 0 auto;
   	padding: 0px;
