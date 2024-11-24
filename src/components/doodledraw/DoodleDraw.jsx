@@ -194,6 +194,12 @@ export default function DoodleDraw (){
         setActiveButton(activeButton === buttonName ? null : buttonName);
     };
 
+    const handleCanvasClick = () => {
+        if (activeButton) {
+            setActiveButton(null);
+        }
+    };
+
 
 
     //저장 처리
@@ -205,7 +211,7 @@ export default function DoodleDraw (){
         const base64Data = dataURL.replace(/^data:image\/png;base64,/, "");
 
         try {
-            const response = await fetch('https://bbimt13.net/upload', {
+            const response = await fetch('http://52.79.232.189:5000/doodle/upload', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -240,6 +246,7 @@ export default function DoodleDraw (){
                         onTouchStart={startDrawing}
                         onTouchMove={drawing}
                         onTouchEnd={stopDrawing}
+                        onClick={handleCanvasClick}
                     ></DrawingCanvas>
                     
                     <SettingBox>

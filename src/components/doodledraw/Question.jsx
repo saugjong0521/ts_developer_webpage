@@ -70,7 +70,7 @@ const ImageAnalysis = ({ imageUrl, analysis, elements, questions }) => {
         setLoading(true);
 
         try {
-            const response = await fetch('/doodle/submit_answers', {
+            const response = await fetch('http://52.79.232.189:5000/doodle/submit_answers', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
