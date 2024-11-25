@@ -51,11 +51,13 @@ export default function DoodleDraw (){
         setCurrentPath([{ x: offsetX, y: offsetY }]); // 새로운 경로 시작
     };
 
+
     const stopDrawing = () => {
         setIsDrawing(false);
         if (ctx) {
             ctx.closePath();
             saveState();
+
         }
     };
 
@@ -131,10 +133,8 @@ export default function DoodleDraw (){
     };
 
     const undoCanvas = () => {
-        if (currentStep > 0) {
-            setCurrentStep(currentStep - 1);
-            redrawCanvas();
-        }
+        if (currentStep < 0) return;
+            setCurrentStep((prev) => prev - 1);
     };
 
 
@@ -163,6 +163,10 @@ export default function DoodleDraw (){
     useEffect(() => {
         if (currentStep >= 0) {
             redrawCanvas();
+        } else {
+            const canvas = canvasRef.current;
+            const context = contextRef.current;
+            context.clearRect(0, 0, canvas.width, canvas.height); 
         }
     }, [currentStep]);
 
@@ -177,8 +181,6 @@ export default function DoodleDraw (){
     
 
     console.log(currentStep)
-
-
 
     
     //세팅바 관련 함수들
@@ -524,3 +526,16 @@ const RemoveColor = styled.p`
     }
     
 `
+
+
+
+/*
+Undo 생성과정
+처음에 undo의 경우, 일그러져서
+history로 배열로 저장 (currentStep으로 각 라인 저장)
+
+첫 라인이 지워지지 않는 상황발생
+2째라인부터 undo기능 첫 라인에는 reset시켜버림
+
+지우개 https://www.w3schools.com/jsref/playcanvas.php?filename=playcanvas_globalcompop&preval=destination-in 참고
+ */
