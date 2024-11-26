@@ -10,6 +10,7 @@ import Register from './components/login/Register';
 import Content from './components/login/Content';
 import DoodleDraw from './components/doodledraw/DoodleDraw';
 import TranslateChat from './components/translatechat/TranslateChat';
+import SelectRoom from './components/translatechat/SelectRoom';
 
 
 const routes = createBrowserRouter([
@@ -25,7 +26,8 @@ const routes = createBrowserRouter([
         element: <Content/>,
         children: [
           { path: 'doodledraw', element: <DoodleDraw/> },
-          { path: 'translatechat', element: <TranslateChat/> }
+          { path: 'selectroom', element: <SelectRoom/>},
+          { path: 'chatting', element: <TranslateChat/> }
         ]
       },
     ]

@@ -7,7 +7,7 @@ export default function Home(){
         <HomeContainer>
             <HomeBox>
                 <button className="translatechat-btn">
-                    <Link to='/content/translatechat'>TranslateChat</Link>
+                    <Link to='/content/selectroom'>TranslateChat</Link>
                 </button>
                 <button className="doodledraw-btn">
                     <Link to='/content/doodledraw'>DoodleDraw</Link>
