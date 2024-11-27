@@ -23,7 +23,8 @@ export default function Login (){
             'username': login.username,
             'password': login.password,
         }, {
-            headers: { 'Content-Type': 'application/json' }
+            headers: { 'Content-Type': 'application/json' },
+            withCredentials: true
         });
 
         setMessage(response.data.message);

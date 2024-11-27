@@ -1,60 +1,48 @@
-import axios from "axios"
-import { useState, useEffect } from "react"
+import React, { useEffect, useState } from 'react';
+import axios from 'axios';
 import styled from "styled-components"
 
-
-
-
-
- export default function SelectRoom () {
-
-    const [room, setRoom] = useState({
-        "id": '',
-        "title": '',
-        description: '',
-        max_users: '',
-        current_users: '',
-    })
-
-    const [chatrooms, setChatrooms] = useState([]); // 추가: 채팅방 목록 상태
-
-
-    const bringroom = async () => {
-        try {
-            const response = await axios.get("https://bbimt13.net/chat_rooms/list", {
-                headers: { 'Content-Type': 'application/json' }
-            });
-            setChatrooms(response.data.rooms); // 수정: 응답에서 rooms 배열을 사용하여 상태 업데이트
-        } catch (error) {
-            console.error(error);
-        }
-    }
+export default function SelectRoom () {
+    const [rooms, setRooms] = useState([]);
 
     useEffect(() => {
-        bringroom();
+        const bringRooms = async () => {
+            try {
+                const response = await axios.get('https://bbimt13.net/room_list');
+                if (response.data.success) {
+                    setRooms(response.data.rooms);
+                } else {
+                    console.error('API 호출 실패:', response.data.message);
+                }
+            } catch (error) {
+                console.error('API 호출 중 에러 발생:', error);
+            }
+        };
+
+        bringRooms();
     }, []);
-    return(
+
+    return (
         <div className="container">
             <ul>
-            {chatrooms.map((room) => (
-                    <Loomlist>
-                            <div key={room.id}>
-                                {room.title} - {room.description} (최대: {room.max_users}, 현재: {room.current_users})
+                {rooms && rooms.length > 0 ? (
+                    rooms.map((rooms) => (
+                        <Loomlist key={rooms.id}>
+                            <div>
+                                {rooms.title}
                             </div>
-                    </Loomlist>
-                ))}
+                        </Loomlist>
+                    ))
+                ) : (
+                    <li>채팅방이 없습니다.</li>
+                )}
             </ul>
-
-            <CreateRoom>
-
-            </CreateRoom>
+            <CreateRoom />
         </div>
-    )
+    );
+};
 
-
- }
-
- const Loomlist = styled.li`
+const Loomlist = styled.li`
     
  `
 
