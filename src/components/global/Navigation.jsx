@@ -14,7 +14,7 @@ export default function Navigation (){
     
     return (
 
-        <NaviContainer style={{ display: isNavVisible ? 'flex' : 'none' }}>
+        <NaviContainer isNavVisible={isNavVisible}>
         <div className="logo"></div>
 
             <div className="navigation">
@@ -41,10 +41,9 @@ export default function Navigation (){
 }
 
 const NaviContainer = styled.div`
-
     width: 5vw;
     height: 100vh;
-    display: flex;
+    display:  ${(props) => (props.isNavVisible) ? 'flex' : 'none'};
     background-color: #bbb;
     border: solid 1px #000;
     box-sizing: border-box;

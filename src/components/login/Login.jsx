@@ -57,7 +57,7 @@ export default function Login (){
                     name="username"
                     value={login.username} 
                     placeholder="아이디를 입력하세요"
-                    onChange={handleInputChange}    
+                    onChange={handleInputChange}
                 />
                 <input 
                     type="password"
