@@ -19,12 +19,11 @@ export default function Login (){
         e.preventDefault();
 
         try{
-        const response = await axios.post("https://bbimt13.net/login", {
+        const response = await axios.post("http://localhost:9000/login", {
             'username': login.username,
             'password': login.password,
         }, {
             headers: { 'Content-Type': 'application/json' },
-            withCredentials: true
         });
 
         setMessage(response.data.message);

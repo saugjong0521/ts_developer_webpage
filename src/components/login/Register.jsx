@@ -18,13 +18,14 @@ export default function Register() { // 컴포넌트 이름 변경
         e.preventDefault();
 
         try {
-            const response = await axios.post("https://bbimt13.net/register", {
+            const response = await axios.post("http://localhost:9000/register", {
                 'username': user.username,
                 'password': user.password,
                 'email': user.email,
                 'nickname': user.nickname,
             }, {
-                headers: { 'Content-Type': 'application/json' }
+                headers: { 'Content-Type': 'application/json' },
+                withCredentials: true
             });
 
             // 서버의 응답 메시지를 상태에 저장

@@ -26,7 +26,7 @@ export default function SelectRoom () {
     useEffect(() => {
         const bringRooms = async () => {
             try {
-                const response = await axios.get('https://bbimt13.net/room_list');
+                const response = await axios.get('http://localhost:9000/room_list');
                 if (response.data.success) {
                     setRooms(response.data.rooms);
                 } else {
@@ -50,12 +50,13 @@ export default function SelectRoom () {
         e.preventDefault();
 
         try {
-            const response = await axios.post('https://bbimt13.net/create_room', {
+            const response = await axios.post('http://localhost:9000/create_room', {
                 'title': createRoom.title,
                 'max_users': createRoom.max_users,
                 'password': createRoom.password
             }, {
-                headers: { 'Content-Type': 'application/json' }
+                headers: { 'Content-Type': 'application/json' },
+                withCredentials: true
             })
 
             if(response.data.success){
@@ -163,9 +164,9 @@ const SelectRoomContainer = styled.div`
         color: #333;
     }
 
-    ::-webkit-scrollbar {
-        display: none;
-    }
+    // ::-webkit-scrollbar {
+    //     display: none;
+    // }
 
     ul {
         display: flex;
