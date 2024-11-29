@@ -19,7 +19,7 @@ export default function Navigation (){
 
             <div className="navigation">
                 <ul>
-                    <li><button><Link to="/content/translatechat" className="translatechat-btn"><IoChatboxEllipses /></Link></button></li>
+                    <li><button><Link to="/content/selectroom" className="translatechat-btn"><IoChatboxEllipses /></Link></button></li>
                     
                     <li><button><Link to="/content/doodledraw" className="doodledraw-btn"><IoIosColorPalette /></Link></button></li>
 
@@ -51,7 +51,7 @@ const NaviContainer = styled.div`
     flex-direction: column;
     justify-content: space-between;
     padding: 15px 0 0 0;
-    
+    z-index: 99;
 
     .logo{
         width: 70%;
