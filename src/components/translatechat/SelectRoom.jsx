@@ -55,8 +55,7 @@ export default function SelectRoom () {
                 'max_users': createRoom.max_users,
                 'password': createRoom.password
             }, {
-                headers: { 'Content-Type': 'application/json' },
-                withCredentials: true
+                headers: { 'Content-Type': 'application/json' }
             })
 
             if(response.data.success){
