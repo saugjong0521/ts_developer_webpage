@@ -45,12 +45,13 @@ const NaviContainer = styled.div`
     height: 100vh;
     display:  ${(props) => (props.isNavVisible) ? 'flex' : 'none'};
     background-color: #bbb;
-    border: solid 1px #000;
+    border: solid 1px #888;
     box-sizing: border-box;
     flex-direction: column;
     justify-content: space-between;
     padding: 15px 0 0 0;
     z-index: 99;
+    border-radius: 0 10px 10px 0;
 
     .logo{
         width: 70%;
@@ -115,6 +116,8 @@ const NaviContainer = styled.div`
         justify-content: space-between;
         gap: 10px;
         background-color: #ddd;
+        border-radius: 0 10px 10px 0;
+
 
         .profile{
             width: 100%;
@@ -139,6 +142,8 @@ const NaviContainer = styled.div`
                 margin: 0 0 0 auto;
                 align-items: center;
                 justify-content: center;
+                border-radius: 0 10px 10px 0;
+
             }
         }
     }
