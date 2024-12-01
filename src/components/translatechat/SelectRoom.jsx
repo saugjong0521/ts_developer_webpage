@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import styled from "styled-components"
+import Login from '../login/Login';
 
 export default function SelectRoom () {
     const [rooms, setRooms] = useState([]);
@@ -24,9 +25,10 @@ export default function SelectRoom () {
 
 
     useEffect(() => {
+
         const bringRooms = async () => {
             try {
-                const response = await axios.get('http://localhost:9000/room_list');
+                const response = await axios.get('https://bbimt13.net/room_list');
                 if (response.data.success) {
                     setRooms(response.data.rooms);
                 } else {
@@ -46,30 +48,31 @@ export default function SelectRoom () {
 
 
 
-    const handleCreateRoom = async (e) => {
-        e.preventDefault();
+const handleCreateRoom = async (e) => {
+    e.preventDefault();
 
-        try {
-            const response = await axios.post('http://localhost:9000/create_room', {
-                'title': createRoom.title,
-                'max_users': createRoom.max_users,
-                'password': createRoom.password
-            }, {
-                headers: { 'Content-Type': 'application/json' }
-            })
-
-            if(response.data.success){
-                alert(setMessage(response.data.success))
-                setIsPopupOpen(false);
-            } else{
-                setMessage('방 생성중 오류가 발생했습니다.')
+    try {
+        const response = await axios.post('https://bbimt13.net/create_room',
+            {
+                title: createRoom.title,
+                max_users: createRoom.max_users,
+                password: createRoom.password,
+            },
+            {
+                headers: {'Content-Type': 'application/json'}
             }
+        );
 
-        } catch(error) {
-            console.error(error);
+        if (response.data.success) {
+            alert(response.data.message);
+            setIsPopupOpen(false);
+        } else {
+            setMessage('방 생성중 오류가 발생했습니다.');
         }
-
+    } catch (error) {
+        console.error(error);
     }
+};
 
     const handleInputChange = (e) => {
         const { name, value } = e.target;
@@ -163,9 +166,9 @@ const SelectRoomContainer = styled.div`
         color: #333;
     }
 
-    // ::-webkit-scrollbar {
-    //     display: none;
-    // }
+    ::-webkit-scrollbar {
+        display: none;
+    }
 
     ul {
         display: flex;
