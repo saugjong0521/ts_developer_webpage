@@ -9,9 +9,9 @@ import Home from './components/login/Home';
 import Register from './components/login/Register';
 import Content from './components/login/Content';
 import DoodleDraw from './components/doodledraw/DoodleDraw';
-import TranslateChat from './components/translatechat/TranslateChat';
 import SelectRoom from './components/translatechat/SelectRoom';
 import axios from 'axios';
+import Chat from './components/translatechat/Chat';
 
 axios.defaults.baseURL = "https://bbimt13.net";
 axios.defaults.withCredentials = true;
@@ -30,7 +30,7 @@ const routes = createBrowserRouter([
         children: [
           { path: 'doodledraw', element: <DoodleDraw/> },
           { path: 'selectroom', element: <SelectRoom/>},
-          { path: 'chatting', element: <TranslateChat/> }
+          { path: 'chat/:id', element: <Chat/> }
         ]
       },
     ]

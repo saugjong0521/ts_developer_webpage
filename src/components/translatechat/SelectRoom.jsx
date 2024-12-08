@@ -2,9 +2,10 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import styled from "styled-components"
 import Login from '../login/Login';
+import { useNavigate } from 'react-router-dom';
 
 export default function SelectRoom () {
-    const [rooms, setRooms] = useState([]);
+    const [room, setRoom] = useState([]);
     const [createRoom, setCreateRoom] = useState({
         title: '',
         max_users: '',
@@ -24,13 +25,14 @@ export default function SelectRoom () {
     }
 
 
+    // 방 불러오기
     useEffect(() => {
 
         const bringRooms = async () => {
             try {
                 const response = await axios.get('https://bbimt13.net/room_list');
                 if (response.data.success) {
-                    setRooms(response.data.rooms);
+                    setRoom(response.data.rooms);
                 } else {
                     console.error('API 호출 실패:', response.data.message);
                 }
@@ -38,7 +40,7 @@ export default function SelectRoom () {
             } catch (error) {
                 console.error('API 호출 중 에러 발생:', error);
 
-                setMessage('방 생성중 오류 발생')
+                setMessage('방 가져오기 중 오류 발생')
             }
         };
 
@@ -47,7 +49,7 @@ export default function SelectRoom () {
 
 
 
-
+// 방 만들기
 const handleCreateRoom = async (e) => {
     e.preventDefault();
 
@@ -83,19 +85,46 @@ const handleCreateRoom = async (e) => {
     };
 
 
+    // 방 입장
+    const navigate = useNavigate()
+
+    const handleJoinRoom = async (id) => {
+
+        const password = prompt("비밀번호를 입력하세요 (없으면 빈칸):");
+        try {
+            const response = await axios.post(`https://bbimt13.net/join_room/${id}`,
+                {
+                    password: password,
+                },
+                {
+                    headers: {'Content-Type': 'application/json'}
+                }
+            );
+
+            console.log(response.data.message)
+
+            if(response.data.success){
+                navigate(`/content/chat/${id}`);
+            } else {
+                alert(response.data.message);
+            }
+        } catch (error) {
+            console.error(error);
+        }
+    }
+
     return (
         <div className="container">
             <SelectRoomContainer>
             <span>채팅방 목록</span>
             <ul>
-                {rooms && rooms.length > 0 ? (
-                    rooms.map((rooms) => (
-                        <Loomlist key={rooms.id}>
+                {room && room.length > 0 ? (
+                    room.map((room) => (
+                        <Loomlist key={room.id}>
                             <div>
-                                {rooms.title}
+                                {room.title}
                             </div>
-
-                            <p>{'>'}</p>
+                            <p onClick={() => handleJoinRoom(room.id)}>{'>'}</p>
                         </Loomlist>
                     ))
                 ) : (
