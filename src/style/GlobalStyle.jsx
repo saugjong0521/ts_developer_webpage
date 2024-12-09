@@ -2,6 +2,7 @@ import { createGlobalStyle } from "styled-components";
 
 
 const GlobalStyle = createGlobalStyle`
+
     /* http://meyerweb.com/eric/tools/css/reset/ 
    v2.0 | 20110126
    License: none (public domain)
@@ -35,6 +36,7 @@ footer, header, hgroup, menu, nav, section {
 body {
 	line-height: 1;
 	overflow: hidden;
+
 }
 ol, ul {
 	list-style: none;
@@ -66,6 +68,7 @@ button{
   	padding: 0px;
   	transition: width 0.3s ease;
 }
+
 
 
 `

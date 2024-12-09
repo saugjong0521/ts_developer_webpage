@@ -352,7 +352,7 @@ export default function DoodleDraw (){
                             }}
                         >
                             {isSettingBoxVisible? <FaRegEyeSlash /> : <FaRegEye />}
-                        </button>
+                        </button> 
 
 
                     </SettingBox>
@@ -498,12 +498,18 @@ const ColorPalette = styled.div`
     flex-wrap: wrap;
 `
 
-const ColorItems = styled.button.attrs(props => ({
+const ColorItems = styled.div.attrs(props => ({
     style: {
         backgroundColor: props.$color
     }
 }))`
     border: ${props => props.$isSelected ? "2px" : "1px"} ${props => props.$isSelected ? 'solid' : "dashed" } black;
+
+    display: flex;
+    position: relative;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
 
     &:hover {
         transform: scale(1.1);
