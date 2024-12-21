@@ -9,7 +9,7 @@ export default function Chat (){
     console.log("Room ID:", roomId);
 
     useEffect(() => {
-        const socket = io("/chat")
+        // const socket = io("/chat")
 
 
 

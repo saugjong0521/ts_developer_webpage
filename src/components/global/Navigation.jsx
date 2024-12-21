@@ -4,18 +4,27 @@ import { IoIosColorPalette } from "react-icons/io";
 import { IoMdArrowRoundBack } from "react-icons/io";
 import logo from './logo.png'
 import { useNavigation } from './NavigationContext';
-import { Link } from "react-router-dom";
+import { Link, Navigate, useNavigate } from "react-router-dom";
 
 
 export default function Navigation (){
     
 
+    const navigate = useNavigate()
+
+
     const { isNavVisible, setIsNavVisible } = useNavigation();
     
+
+    const handleLogoHome = () => {
+        navigate('/home')
+    }
+
+
     return (
 
         <NaviContainer isNavVisible={isNavVisible}>
-        <div className="logo"></div>
+        <div className="logo" onClick={handleLogoHome}></div>
 
             <div className="navigation">
                 <ul>
