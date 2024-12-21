@@ -30,7 +30,7 @@ export default function SelectRoom () {
 
         const bringRooms = async () => {
             try {
-                const response = await axios.get('https://bbimt13.net/room_list');
+                const response = await axios.get('https://bbimt13.net/api/rooms/list');
                 if (response.data.success) {
                     setRoom(response.data.rooms);
                 } else {
@@ -54,7 +54,7 @@ const handleCreateRoom = async (e) => {
     e.preventDefault();
 
     try {
-        const response = await axios.post('https://bbimt13.net/create_room',
+        const response = await axios.post('https://bbimt13.net/api/rooms/create',
             {
                 title: createRoom.title,
                 max_users: createRoom.max_users,

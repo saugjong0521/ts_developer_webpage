@@ -18,7 +18,7 @@ export default function Register() { // 컴포넌트 이름 변경
         e.preventDefault();
 
         try {
-            const response = await axios.post("https://bbimt13.net/register", {
+            const response = await axios.post("https://bbimt13.net/api/auth/register", {
                 'username': user.username,
                 'password': user.password,
                 'email': user.email,
