@@ -88,23 +88,38 @@ const handleCreateRoom = async (e) => {
     // 방 입장
     const navigate = useNavigate()
 
-    const handleJoinRoom = async (id) => {
-
-        const password = prompt("비밀번호를 입력하세요 (없으면 빈칸):");
+    const handleJoinRoom = async (id, password) => {
+        // payload
+        let payload = {};
+    
+        // 비밀번호가 있을 경우 처리
+        if (password && password.trim() !== "") {
+            const userInput = prompt("비밀번호를 입력하세요:");
+            
+            if (userInput === null) {
+                return;
+            }
+            
+            if (!userInput.trim()) {
+                alert("비밀번호를 입력해야 합니다.");
+                return;
+            }
+            
+            payload.password = userInput;
+        }
+    
         try {
-            const response = await axios.post(`https://bbimt13.net/join_room/${id}`,
-                {
-                    password: password,
-                },
+            const response = await axios.post(`https://bbimt13.net/${id}/join`,
+                payload,
                 {
                     headers: {'Content-Type': 'application/json'}
                 }
             );
-
-            console.log(response.data.message)
-
+    
+            console.log(response.data.message);
+    
             if(response.data.success){
-                navigate(`/content/chat/${id}`);
+                navigate(`/content/chat`);
             } else {
                 alert(response.data.message);
             }
@@ -112,6 +127,7 @@ const handleCreateRoom = async (e) => {
             console.error(error);
         }
     }
+    
 
     return (
         <div className="container">

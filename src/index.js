@@ -30,7 +30,7 @@ const routes = createBrowserRouter([
         children: [
           { path: 'doodledraw', element: <DoodleDraw/> },
           { path: 'selectroom', element: <SelectRoom/>},
-          { path: 'chat/:id', element: <Chat/> }
+          { path: 'chat', element: <Chat/> }
         ]
       },
     ]
