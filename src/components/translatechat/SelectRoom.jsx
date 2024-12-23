@@ -86,47 +86,42 @@ const handleCreateRoom = async (e) => {
 
 
     // 방 입장
+    // 비밀번호 함 던지고 fail 뜰시, prompt창 띄우기
     const navigate = useNavigate()
 
     const handleJoinRoom = async (id, password) => {
-        // payload
         let payload = {};
     
-        // 비밀번호가 있을 경우 처리
-        if (password && password.trim() !== "") {
+        if (password) {
             const userInput = prompt("비밀번호를 입력하세요:");
-            
-            if (userInput === null) {
-                return;
-            }
-            
+            if (userInput === null) return;
             if (!userInput.trim()) {
                 alert("비밀번호를 입력해야 합니다.");
                 return;
             }
-            
             payload.password = userInput;
         }
-    
+
         try {
-            const response = await axios.post(`https://bbimt13.net/${id}/join`,
+            const response = await axios.post(`https://bbimt13.net/api/rooms/${id}/join`,
                 payload,
                 {
-                    headers: {'Content-Type': 'application/json'}
+                    headers: {
+                        'Content-Type': 'application/json',
+                    }
                 }
             );
-    
-            console.log(response.data.message);
-    
+
             if(response.data.success){
                 navigate(`/content/chat`);
             } else {
-                alert(response.data.message);
+                alert(response.data.message || '방 입장에 실패했습니다.');
             }
         } catch (error) {
-            console.error(error);
+            alert(error.response?.data?.message || '방 입장 중 오류가 발생했습니다.');
         }
     }
+    
     
 
     return (
@@ -140,7 +135,7 @@ const handleCreateRoom = async (e) => {
                             <div>
                                 {room.title}
                             </div>
-                            <p onClick={() => handleJoinRoom(room.id)}>{'>'}</p>
+                            <p onClick={() => handleJoinRoom(room.id, room.password)}>{'>'}</p>
                         </Loomlist>
                     ))
                 ) : (
