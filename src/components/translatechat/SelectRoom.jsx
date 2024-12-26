@@ -86,41 +86,42 @@ const handleCreateRoom = async (e) => {
 
 
     // 방 입장
-    // 비밀번호 함 던지고 fail 뜰시, prompt창 띄우기
     const navigate = useNavigate()
 
-    const handleJoinRoom = async (id, password) => {
-        let payload = {};
-    
-        if (password) {
-            const userInput = prompt("비밀번호를 입력하세요:");
-            if (userInput === null) return;
-            if (!userInput.trim()) {
-                alert("비밀번호를 입력해야 합니다.");
-                return;
+    const handleJoinRoom = (id) => {
+        axios.post(`https://bbimt13.net/api/rooms/${id}/join`, 
+            {}, 
+            {
+                headers: {'Content-Type': 'application/json',}
             }
-            payload.password = userInput;
-        }
-
-        try {
-            const response = await axios.post(`https://bbimt13.net/api/rooms/${id}/join`,
-                payload,
-                {
+        )
+        .then((response) => {
+            navigate(`/content/chat`);
+        })
+        .catch((error) => {              
+                const userInput = prompt("비밀번호를 입력하세요:");
+                if (userInput === null || !userInput.trim()) {
+                    alert("비밀번호를 입력해야 합니다.");
+                    return;
+                }
+                axios.post(`https://bbimt13.net/api/rooms/${id}/join`, {
+                    password: userInput
+                }, {
                     headers: {
                         'Content-Type': 'application/json',
                     }
-                }
-            );
+                })
+                .then((response) => {
+                    navigate(`/content/chat`);
+                })
+                .catch((error) => {
+                    alert(error.response?.data?.message || "방 입장 중 오류가 발생했습니다.");
+                });
+        });
+    };
+    
+    
 
-            if(response.data.success){
-                navigate(`/content/chat`);
-            } else {
-                alert(response.data.message || '방 입장에 실패했습니다.');
-            }
-        } catch (error) {
-            alert(error.response?.data?.message || '방 입장 중 오류가 발생했습니다.');
-        }
-    }
     
     
 
@@ -335,4 +336,4 @@ const ModalBackground = styled.div`
     height: 100vh;
     background-color: rgba(0, 0, 0, 0.5);
     z-index: 9;
-`;
+`
