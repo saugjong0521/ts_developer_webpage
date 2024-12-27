@@ -5,19 +5,31 @@ import { useParams } from 'react-router-dom';
 
 export default function Chat() {
     const { id: roomId } = useParams();
+    const { nickname: userNickName } = useParams();
     const [messages, setMessages] = useState([]);
-    console.log("Room ID:", roomId);
+    
+    const socket = new socket("https://bbimt13.net/api/users/online")
+
 
     useEffect(() => {
-        const socket = io("/chat");
 
-        const socketJoin = () => {
-            socket.emit("join", { room_id: roomId });
-        };
+        const timestamp = new Date();
 
-        const socketLeave = () => {
-            socket.emit("leave", { room_id: roomId });
-        };
+        if(!socket){
+            return;
+        }
+
+        socket.on('user_joined', {
+            user_id: roomId,
+            nickname: userNickName,
+            timestamp: timestamp
+        });
+        
+        socket.on('receive_original_message', {
+            nickname: userNickName,
+            message: "",
+            timestamp: timestamp
+        });
 
         const handleReceiveMessage = (data) => {
             console.log("Message received:", data);
@@ -26,10 +38,8 @@ export default function Chat() {
 
         socket.on("receive_original_message", handleReceiveMessage);
 
-        socketJoin();
 
         return () => {
-            socketLeave();
             socket.disconnect();
         };
     }, [roomId]);
